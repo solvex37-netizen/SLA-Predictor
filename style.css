@@ -1,0 +1,176 @@
+
+/* ===== COLOR VARIABLES ===== */
+:root {
+    --bg-color: #000000;        
+    --card-bg: #050505;       
+    --text-color: #39ff14;      
+    --muted-text: #8aff7a;      
+    --primary: #b026ff;         
+}
+
+/* DARK MODE */
+.dark-mode {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #f1f1f1;
+    --muted-text: #b0b0b0;
+    --primary: #4dabf7;
+}
+
+/* ===== RESET ===== */
+* {
+    box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    font-family: Arial, sans-serif;
+    color: var(--text-color);
+}
+
+/* Dark mode toggle button */
+.dark-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 6px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* ===== MAIN CONTAINER ===== */
+.main-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* Titles */
+.title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--muted-text);
+    margin-bottom: 30px;
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Headings */
+.card h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Inputs */
+input[type="number"],
+input[type="range"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    background: transparent;
+    color: var(--text-color);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button */
+.primary-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* Muted text */
+.muted-text {
+    color: var(--muted-text);
+    font-size: 14px;
+}
+
+
+
+/* ===== BOT ===== */
+.bot-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bot {
+    width: 80px;
+    height: 60px;
+    border: 2px solid var(--primary);
+    border-radius: 15px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 0 12px var(--primary);
+}
+
+.eye {
+    width: 10px;
+    height: 10px;
+    background: var(--text-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    animation: blink 4s infinite;
+}
+
+.eye.left {
+    left: 20px;
+}
+
+.eye.right {
+    right: 20px;
+}
+
+@keyframes blink {
+    0%, 95%, 100% {
+        transform: scaleY(1);
+    }
+    97% {
+        transform: scaleY(0.1);
+    }
+}
+
+.bot-text {
+    color: var(--muted-text);
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predictive Process Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Dark Mode Toggle -->
+    <button class="dark-toggle" onclick="toggleDarkMode()">^</button>
+
+
+    <div class="bot-container">
+        <div class="bot">
+             <div class="eye left"></div>
+             <div class="eye right"></div>
+        </div>
+        <p class="bot-text">Hi!! I predict SLA risks </p>
+    </div>
+
+
+
+    <div class="main-container">
+
+        <h1 class="title">Predictive Process Simulation</h1>
+        <p class="subtitle">Proactive SLA Management Dashboard</p>
+
+        <!-- Current Operations -->
+        <div class="card">
+            <h2>Current Operations</h2>
+
+            <label>Current Backlog</label>
+            <input type="number" id="backlog" value="120">
+
+            <label>Incoming Cases / Hour</label>
+            <input type="number" id="incoming" value="100">
+
+            <label>Employees</label>
+            <input type="number" id="employees" value="5">
+
+            <label>SLA Limit</label>
+            <input type="number" id="sla" value="200">
+
+            <button class="primary-btn" onclick="forecastSLA()">Forecast SLA Risk</button>
+        </div>
+
+        <!-- Forecast Result -->
+        <div class="card">
+            <h2>Forecast Result</h2>
+            <p id="forecastResult" class="muted-text">
+                Click forecast to see result
+            </p>
+        </div>
+
+        <!-- What-if Scenario -->
+        <div class="card">
+            <h2>What-If Scenario</h2>
+
+            <label>Change Employees</label>
+            <input type="range" min="1" max="15" value="5"
+                   id="whatIfSlider" oninput="runWhatIf()">
+
+            <p id="whatIfResult" class="muted-text">
+                Adjust slider to simulate SLA risk
+            </p>
+        </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        function forecastSLA() {
+            const backlog = Number(document.getElementById("backlog").value);
+            const incoming = Number(document.getElementById("incoming").value);
+            const employees = Number(document.getElementById("employees").value);
+            const sla = Number(document.getElementById("sla").value);
+
+            // Simple simulation logic
+            const processingCapacity = employees * 30; // cases/hour
+            const futureBacklog = backlog + incoming - processingCapacity;
+
+            let probability = 0;
+
+            if (futureBacklog > sla) {
+                probability = 90;
+            } else if (futureBacklog > sla * 0.8) {
+                probability = 60;
+            } else {
+                probability = 20;
+            }
+
+            document.getElementById("forecastResult").innerHTML =
+                `⚠️ Estimated SLA Breach Probability: <b>${probability}%</b>`;
+        }
+
+        function runWhatIf() {
+            const sliderEmployees =
+                Number(document.getElementById("whatIfSlider").value);
+
+            const backlog = Number(document.getElementById("backlog").value);
+            const incoming = Number(document.getElementById("incoming").value);
+            const sla = Number(document.getElementById("sla").value);
+
+            const capacity = sliderEmployees * 30;
+            const projectedBacklog = backlog + incoming - capacity;
+
+            let message = "";
+
+            if (projectedBacklog > sla) {
+                message = `🚨 High SLA Breach Risk with ${sliderEmployees} employees`;
+            } else {
+                message = `✅ SLA Safe Zone with ${sliderEmployees} employees`;
+            }
+
+            document.getElementById("whatIfResult").innerHTML = message;
+        }
+
+       
+    </script>
+
+</body>
+</html>
